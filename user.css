@@ -1,37 +1,30 @@
 /* ===============================
-   CYBERNIGHT – EDGERUNNERS GLASS (fond ultra-visible – ajusté février 2026)
+   CYBERNIGHT CHAT – EDGERUNNERS GLASS + NYAN CAT
+   (même rendu que preview mais couleurs CyberNight – février 2026)
    =============================== */
 
 :root {
-    --glass-bg: rgba(8, 18, 32, 0.20);       /* ← très transparent pour voir le fond */
-    --glass-strong: rgba(8, 18, 32, 0.28);
     --cyan: #00F0FF;
     --sandevistan: #00FF9C;
     --text-main: #E6F1FF;
     --text-soft: #9FB3C8;
+    --glass-bg: rgba(8, 18, 32, 0.20);       /* ultra-transparent glass */
+    --glass-strong: rgba(8, 18, 32, 0.28);
 }
 
-/* Fond principal – prioritaire et visible */
+/* Fond Night City fixe et ultra-visible */
 .Root__top-container {
     background: url("https://github.com/me974974/CyberNight/blob/main/assets/nightcity.png?raw=true") center / cover no-repeat fixed !important;
     background-attachment: fixed !important;
     background-color: transparent !important;
 }
 
-/* Overlay → supprimé ou très léger (teste sans d'abord) */
+/* Pas d'overlay sombre → fond bien visible */
 .Root__top-container::after {
-    content: none !important;  /* ← enlève l'overlay sombre qui cache le plus */
-    /* Si texte trop dur à lire sur zones claires, décommente et baisse à 0.15 :
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: rgba(8, 18, 32, 0.12);
-    pointer-events: none;
-    z-index: -1;
-    */
+    content: none !important;
 }
 
-/* Panneaux principaux : glass ultra-fin */
+/* Éléments glassmorphism cyber (comme ton CSS fourni) */
 .Root__main-view,
 .main-yourLibraryX-library,
 #Desktop_PanelContainer_Id,
@@ -40,7 +33,7 @@
 .view-homeShortcutsGrid-shortcut,
 .ChipInnerComponent-sm {
     background: var(--glass-bg) !important;
-    backdrop-filter: blur(14px) !important;   /* blur réduit pour plus de netteté fond */
+    backdrop-filter: blur(14px) !important;
     -webkit-backdrop-filter: blur(14px) !important;
     border-radius: 14px;
     border: 1px solid rgba(0, 240, 255, 0.10);
@@ -48,14 +41,16 @@
     z-index: 1;
 }
 
-/* Sidebar : transparent + glow cyan léger */
-.Root__nav-bar {
+/* Sidebar nav + library */
+.Root__nav-bar,
+#Desktop_LeftSidebar_Id,
+.YourLibraryX {
     background: rgba(8, 18, 32, 0.25) !important;
     backdrop-filter: blur(12px) !important;
     border-right: 1px solid rgba(0, 240, 255, 0.08);
 }
 
-/* Barre player : très transparente avec gradient subtil */
+/* Barre now-playing très transparente */
 .Root__now-playing-bar {
     background: rgba(8, 18, 32, 0.18) !important;
     border: 1px solid rgba(0, 240, 255, 0.12);
@@ -63,10 +58,10 @@
     border-radius: 16px;
 }
 
-/* Textes lisibles même sur fond chargé */
+/* Textes lisibles sur fond chargé */
 * {
     color: var(--text-main) !important;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7), 0 0 6px rgba(0, 240, 255, 0.15);  /* ← shadow + glow cyan subtil */
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7), 0 0 6px rgba(0, 240, 255, 0.15);
 }
 
 span,
@@ -77,47 +72,93 @@ div[data-testid="context-item-info-subtitle"],
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
 }
 
-/* Play button + glows conservés mais boostés */
+/* Garder le chat noir en silhouette (comme preview) */
+.main-view-container .before-scroll-node>*>:first-child {
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0));
+    position: absolute;
+}
+
+/* Barre de progression : Nyan Cat + gradient cyber */
+.progress-bar__slider {
+    transform: translate(-50%, -50%) !important;
+    background-color: transparent !important;
+    background-image: url("https://files.catbox.moe/3u8q0z.gif");  /* mirror stable Nyan Cat */
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 40px;
+    width: 64px;
+    box-shadow: none;
+    display: flex;
+    z-index: 10;
+}
+
+.x-progressBar-fillColor {
+    background: linear-gradient(90deg, var(--sandevistan), var(--cyan)) !important;
+    box-shadow: 0 0 12px var(--sandevistan);
+    background-size: 200% 100%;
+    animation: cyber-flow 6s linear infinite;
+}
+
+@keyframes cyber-flow {
+    to { background-position: -200% 0; }
+}
+
+/* Boutons prev/next rotatés + glow cyber */
+[data-testid="control-button-skip-forward"] {
+    rotate: 90deg;
+    filter: drop-shadow(0 0 8px var(--cyan));
+}
+
+[data-testid="control-button-skip-back"] {
+    rotate: -90deg;
+    filter: drop-shadow(0 0 8px var(--cyan));
+}
+
+/* Play/pause gros glow cyan */
 button[data-testid="control-button-playpause"] {
     background-color: var(--cyan) !important;
     box-shadow: 0 0 16px var(--cyan), 0 0 32px rgba(0,240,255,0.5);
     border-radius: 50%;
 }
+
 button[data-testid="control-button-playpause"]:hover {
     box-shadow: 0 0 24px var(--cyan), 0 0 48px rgba(0,240,255,0.7);
 }
 
-/* Progression + scrollbar */
-.x-progressBar-fillColor {
-    background: linear-gradient(90deg, var(--sandevistan), var(--cyan)) !important;
-    box-shadow: 0 0 12px var(--sandevistan);
-}
-.progress-bar__slider {
-    background: var(--sandevistan) !important;
-    box-shadow: 0 0 10px var(--sandevistan);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--sandevistan);
-    box-shadow: 0 0 8px var(--sandevistan);
-}
-::-webkit-scrollbar-thumb:hover {
-    background: var(--cyan);
-}
-
-/* Glows cyber */
-.cyber-smart svg,
-button[aria-checked="true"] svg {
-    filter: drop-shadow(0 0 10px #00FF9C) drop-shadow(0 0 4px #00F0FF);
+/* Éléments transparent (comme ton premier CSS) */
+.Root__globalNav,
+.Root__top-container:has(#VideoPlayerCinema_ReactPortal),
+.main-entityHeader-container>*,
+.playlist-playlist-playlistContent,
+.main-entityHeader-backgroundColor,
+.playlist-playlist-actionBarBackground-background,
+.main-actionBarBackground-background,
+.Root__now-playing-bar>button,
+.lyrics-lyrics-background,
+.main-view-container__scroll-node-child>main>section>div>div:nth-child(2),
+.Root__right-sidebar>*,
+.lyrics-lyrics-container:first-child,
+.marketplace-header {
+    background-color: transparent !important;
+    background-image: none !important;
 }
 
-/* Gestion écrans spéciaux */
-#main:has(#VideoPlayerCinema_ReactPortal) .Root__main-view,
-#main:has(#VideoPlayerCinema_ReactPortal) .Root__right-sidebar,
-#main:has(#VideoPlayerCinema_ReactPortal) .Root__nav-bar {
-    display: none !important;
+/* Gestion modes spéciaux (fullscreen lyrics / expanded library) */
+#main:has(#VideoPlayerCinema_ReactPortal) {
+    & .Root__main-view,
+    .Root__right-sidebar,
+    .Root__nav-bar {
+        display: none !important;
+    }
 }
 
 #main:has(.main-yourLibraryX-libraryRootlist > * > ul[role="treegrid"]) .Root__main-view {
     display: none !important;
+}
+
+/* Bonus : glow cyber sur icônes actives */
+.cyber-smart svg,
+button[aria-checked="true"] svg,
+svg path {
+    filter: drop-shadow(0 0 6px var(--sandevistan)) drop-shadow(0 0 3px var(--cyan));
 }
