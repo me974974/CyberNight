@@ -1,134 +1,122 @@
 // ===============================
-// CYBERNIGHT – THEME JS (refactored based on working theme)
+// CYBERNIGHT – THEME JS (mise à jour février 2026)
 // ===============================
 
 (function () {
     if (!Spicetify?.Player) {
-        console.warn("[Cybernight] Spicetify.Player not ready yet");
+        console.warn("[Cybernight] Spicetify.Player pas encore prêt");
         return;
     }
 
-    const THEME_PATH = Spicetify.getThemePath();  // Majuscule S
+    const THEME_PATH = Spicetify.getThemePath();
 
-    function waitForElement(els, func, timeout = 100) {
-        const queries = els.map((el) => document.querySelector(el));
-        if (queries.every((a) => a)) {
-            func(queries);
-        } else if (timeout > 0) {
-            setTimeout(waitForElement, 300, els, func, --timeout);
-        }
+    function waitForElement(selectors, callback, maxAttempts = 60) {
+        let attempts = 0;
+        const interval = setInterval(() => {
+            const elements = selectors.map(sel => document.querySelector(sel)).filter(Boolean);
+            if (elements.length === selectors.length) {
+                clearInterval(interval);
+                callback(elements);
+            }
+            attempts++;
+            if (attempts >= maxAttempts) {
+                clearInterval(interval);
+                console.warn("[Cybernight] Éléments non trouvés après " + maxAttempts + " tentatives : " + selectors.join(", "));
+            }
+        }, 300);
     }
 
     function loadSVG(button, filename) {
         if (!filename) return;
         fetch(`${THEME_PATH}/assets/${filename}`)
             .then(res => {
-                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                if (!res.ok) throw new Error(`Erreur HTTP ${res.status}`);
                 return res.text();
             })
             .then(svg => {
                 button.innerHTML = svg;
-                console.log(`[Cybernight] Loaded SVG: ${filename}`);
+                console.log(`[Cybernight] SVG chargé : ${filename}`);
             })
-            .catch(err => console.error(`[Cybernight] SVG load error (${filename}):`, err));
+            .catch(err => console.error(`[Cybernight] Erreur chargement SVG ${filename} :`, err));
     }
 
-    function setupButton(buttonSelector, states) {
-        waitForElement([buttonSelector], ([btn]) => {
-            console.log(`[Cybernight] Found button: ${buttonSelector}`);
+    function setupButton(selector, states) {
+        waitForElement([selector], ([btn]) => {
+            console.log(`[Cybernight] Bouton trouvé : ${selector}`);
 
-            function update() {
-                const label = btn.getAttribute("aria-label")?.toLowerCase() || "";
-                const isChecked = btn.getAttribute("aria-checked") === "true";
+            function updateState() {
+                const label = (btn.getAttribute("aria-label") || "").toLowerCase();
+                const checked = btn.getAttribute("aria-checked") === "true";
 
-                let matched = false;
+                let applied = false;
                 for (const state of states) {
                     if (
-                        (state.label && label.includes(state.label)) ||
-                        (state.checked !== undefined && state.checked === isChecked)
+                        (state.label && label.includes(state.label.toLowerCase())) ||
+                        (state.checked !== undefined && state.checked === checked)
                     ) {
                         loadSVG(btn, state.svg);
-                        if (state.class) {
-                            btn.classList.add(state.class);
-                        } else {
-                            btn.classList.remove("cyber-smart");
-                        }
-                        matched = true;
+                        if (state.class) btn.classList.add(state.class);
+                        else btn.classList.remove("cyber-smart");
+                        applied = true;
                         break;
                     }
                 }
-
-                if (!matched) {
-                    // fallback
+                if (!applied) {
                     loadSVG(btn, states[states.length - 1].svg);
                     btn.classList.remove("cyber-smart");
                 }
             }
 
-            // Appel initial
-            update();
+            updateState();
 
-            // Observer sur les changements d'attributs
-            const observer = new MutationObserver(update);
+            const observer = new MutationObserver(updateState);
             observer.observe(btn, { attributes: true, attributeFilter: ["aria-label", "aria-checked"] });
 
-            // Bonus : ré-update si le player change de track/état
-            Spicetify.Player.addEventListener("playerstatechanged", update);
-            Spicetify.Player.addEventListener("songchange", update);
+            Spicetify.Player.addEventListener("playerstatechanged", updateState);
+            Spicetify.Player.addEventListener("songchange", updateState);
         });
     }
 
-    function init() {
-        console.log("[Cybernight] Theme JS initializing...");
+    function initButtons() {
+        console.log("[Cybernight] Initialisation des boutons custom...");
 
         setupButton('[data-testid="control-button-shuffle"]', [
             { label: "smart shuffle", svg: "shuffle-smart.svg", class: "cyber-smart" },
             { checked: true, svg: "shuffle-active.svg" },
-            { svg: "shuffle.svg" } // fallback
+            { svg: "shuffle.svg" }
         ]);
 
         setupButton('[data-testid="control-button-repeat"]', [
             { label: "repeat one", svg: "repeat-one.svg" },
             { checked: true, svg: "repeat-active.svg" },
-            { svg: "repeat.svg" } // fallback
+            { svg: "repeat.svg" }
         ]);
     }
 
-    // Set background via JS (adapted from working theme)
-    waitForElement([".Root__top-container"], ([el]) => {
-        fetch(`${THEME_PATH}/assets/nightcity.png`)
-            .then(res => res.blob())
-            .then(blob => {
-                const url = URL.createObjectURL(blob);
-                el.style.backgroundImage = `url(${url})`;
-                el.style.backgroundSize = "cover";
-                el.style.backgroundPosition = "center";
-                el.style.backgroundRepeat = "no-repeat";
-                console.log("[Cybernight] Background loaded via JS!");
-            })
-            .catch(err => console.error("[Cybernight] BG load error:", err));
+    // Fond d'écran via GitHub raw (plus fiable que local)
+    waitForElement([".Root__top-container"], ([container]) => {
+        const bgUrl = "https://github.com/me974974/CyberNight/blob/main/assets/nightcity.png?raw=true";
+        container.style.backgroundImage = `url(${bgUrl})`;
+        container.style.backgroundSize = "cover";
+        container.style.backgroundPosition = "center";
+        container.style.backgroundRepeat = "no-repeat";
+        container.style.backgroundAttachment = "fixed";
+        console.log("[Cybernight] Fond chargé depuis GitHub : " + bgUrl);
     });
 
-    // Lancement principal : attendre que le player soit dispo + DOM ready-ish
-    if (Spicetify.Player && document.querySelector('[data-testid="control-button-shuffle"]')) {
-        init();
-    } else {
-        const interval = setInterval(() => {
-            if (Spicetify.Player && document.body) {
-                clearInterval(interval);
-                init();
-            }
-        }, 500);
-    }
+    // Lancement
+    const checkInterval = setInterval(() => {
+        if (Spicetify.Player) {
+            clearInterval(checkInterval);
+            initButtons();
+        }
+    }, 400);
 
-    // Observer for dynamic updates (from working theme)
-    const observer = new MutationObserver(() => {
-        init();  // Re-run setup if needed
-    });
-
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
+    // Observer global pour les changements dynamiques
+    new MutationObserver(() => {
+        if (document.querySelector('[data-testid="control-button-shuffle"]')) {
+            initButtons();
+        }
+    }).observe(document.body, { childList: true, subtree: true });
 
 })();

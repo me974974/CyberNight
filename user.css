@@ -1,5 +1,5 @@
 /* ===============================
-   CYBERNIGHT – EDGERUNNERS GLASS (refactored based on working theme)
+   CYBERNIGHT – EDGERUNNERS GLASS
    =============================== */
 
 :root {
@@ -11,90 +11,50 @@
     --text-soft: #9FB3C8;
 }
 
-/* Global */
-.Root__globalNav,
-
-/* Top bar */
-.Root__nav-bar,
-
-.main-entityHeader-container>*,
-.playlist-playlist-playlistContent,
-
-/* Playlist colored background */
-.main-entityHeader-backgroundColor,
-.playlist-playlist-actionBarBackground-background,
-.main-actionBarBackground-background,
-
-.Root__now-playing-bar>button,
-.lyrics-lyrics-background,
-.main-view-container__scroll-node-child>main>section>div>div:nth-child(2),
-.Bdcf5g__Rug3TGqSdbiy,
-
-.Root__now-playing-bar,
-/* Sidebar left your library */
-#Desktop_LeftSidebar_Id,
-.YourLibraryX,
-
-#Desktop_PanelContainer_Id::before,
-.main-home-homeHeader,
-.main-view-container__scroll-node-child>*>*,
-.artist-artistDiscography-headerContainer,
-.main-view-container__scroll-node-child>main>section>div:last-child,
-.search-searchCategory-contentArea::after,
-.main-nowPlayingView-contextItemInfo::before,
-.Box-group-naked-listRow-isInteractive-hasLeadingOrMedia-draggable-minBlockSize_56px,
-
-/* Artist page colored background */
-.main-view-container .before-scroll-node>*>:last-child,
-.main-view-container .before-scroll-node>*>:last-child:after,
-
-/* Fullscreen artist page on playing music */
-/* [data-overlayscrollbars-viewport="scrollbarHidden overflowXHidden overflowYScroll"]>*>*>*>*>*:first-child, */
-
-/* Right sidebar for queue */
-.Root__right-sidebar>*,
-
-/* Fullscreen lyrics */
-[data-overlayscrollbars-initialize="true"]:has(#VideoPlayerCinema_ReactPortal),
-.lyrics-lyrics-container:first-child,
-:has(+.lyrics-lyrics-container),
-
-/* Spicetify marketplace */
-.marketplace-header
-
-/* Remove bg */
-    {
+/* Fond global via GitHub (supprime l'ancien ::before si présent) */
+.Root__top-container {
     background-color: transparent !important;
-    background-image: none !important;
+    background-image: url("https://github.com/me974974/CyberNight/blob/main/assets/nightcity.png?raw=true") !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
 }
 
-/* ===============================
-   GLASS PANELS
-   =============================== */
+/* Overlay sombre optionnel pour meilleure lisibilité */
+.Root__top-container::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 18, 32, 0.35);
+    pointer-events: none;
+    z-index: -1;
+}
 
+/* Glassmorphism sur les panneaux principaux */
 .Root__main-view,
 .main-yourLibraryX-library,
 #Desktop_PanelContainer_Id,
 .Root__right-sidebar,
 .Root__now-playing-bar {
     background: var(--glass-bg) !important;
-    backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px) !important;
+    -webkit-backdrop-filter: blur(18px) !important;
     border-radius: 14px;
     border: 1px solid rgba(0, 240, 255, 0.08);
+    position: relative;
+    z-index: 2;
 }
 
 /* Sidebar */
 .Root__nav-bar {
     background: rgba(8, 18, 32, 0.65) !important;
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px) !important;
 }
 
-/* ===============================
-   TEXT
-   =============================== */
-
+/* Textes */
 * {
-    color: var(--text-main);
+    color: var(--text-main) !important;
 }
 
 span,
@@ -102,20 +62,13 @@ div[data-testid="context-item-info-subtitle"] {
     color: var(--text-soft) !important;
 }
 
-/* ===============================
-   PLAYER BAR – GRADIENT
-   =============================== */
-
+/* Barre player gradient */
 .Root__now-playing-bar {
-    background: linear-gradient(
-        90deg,
-        rgba(0, 240, 255, 0.15),
-        rgba(108, 92, 231, 0.25)
-    ) !important;
+    background: linear-gradient(90deg, rgba(0, 240, 255, 0.15), rgba(108, 92, 231, 0.25)) !important;
     border-radius: 16px;
 }
 
-/* Play button neon */
+/* Bouton play glow */
 button[data-testid="control-button-playpause"] {
     background-color: var(--cyan) !important;
     box-shadow: 0 0 12px var(--cyan);
@@ -124,25 +77,17 @@ button[data-testid="control-button-playpause"] {
 }
 
 button[data-testid="control-button-playpause"]:hover {
-    box-shadow: 0 0 18px var(--cyan),
-                0 0 30px rgba(0, 240, 255, 0.4);
+    box-shadow: 0 0 18px var(--cyan), 0 0 30px rgba(0, 240, 255, 0.4);
 }
 
-/* Light glitch hover */
+/* Hover glitch léger */
 button[data-testid^="control-button"]:hover {
     transform: translateX(1px) skewX(-2deg);
 }
 
-/* ===============================
-   PROGRESS BAR – SANDEVISTAN
-   =============================== */
-
+/* Barre de progression Sandevistan */
 .x-progressBar-fillColor {
-    background: linear-gradient(
-        90deg,
-        var(--sandevistan),
-        var(--cyan)
-    ) !important;
+    background: linear-gradient(90deg, var(--sandevistan), var(--cyan)) !important;
     box-shadow: 0 0 10px var(--sandevistan);
 }
 
@@ -151,10 +96,7 @@ button[data-testid^="control-button"]:hover {
     box-shadow: 0 0 8px var(--sandevistan);
 }
 
-/* ===============================
-   SCROLLBAR
-   =============================== */
-
+/* Scrollbar custom */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -173,61 +115,40 @@ button[data-testid^="control-button"]:hover {
     background: var(--cyan);
 }
 
-/* ===============================
-   ACTIVE SELECTION
-   =============================== */
-
+/* Sélection active */
 [aria-selected="true"] {
     background: rgba(0, 240, 255, 0.1) !important;
     border-left: 2px solid var(--cyan);
 }
 
-/* Smart shuffle glow */
-.cyber-smart svg {
+/* Glow smart shuffle & boutons actifs */
+.cyber-smart svg,
+button[aria-checked="true"] svg {
     filter: drop-shadow(0 0 8px #00FF9C);
 }
 
-/* Active buttons glow */
-button[aria-checked="true"] svg {
-    filter: drop-shadow(0 0 6px #00F0FF);
-}
-
-/* Artist page gradient image */
-.main-view-container .before-scroll-node>*>:first-child {
-    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0));
+/* Masque gradient sur header artiste */
+.main-view-container .before-scroll-node > * > :first-child {
+    mask-image: linear-gradient(to bottom, black 90%, transparent);
     position: absolute;
 }
 
-#Desktop_PanelContainer_Id {
-    border-radius: 8px;
+/* Gestion fullscreen lyrics / library étendue */
+#main:has(#VideoPlayerCinema_ReactPortal) .Root__main-view,
+#main:has(#VideoPlayerCinema_ReactPortal) .Root__right-sidebar,
+#main:has(#VideoPlayerCinema_ReactPortal) .Root__nav-bar {
+    display: none !important;
 }
 
-/* Do not display background elements when fullscreen lyrics */
-#main:has(#VideoPlayerCinema_ReactPortal) {
-
-    & .Root__main-view,
-    .Root__right-sidebar,
-    .Root__nav-bar {
-        display: none !important;
-    }
-
-}
-
-/* Do not display main view when expanded library */
 #main:has(.main-yourLibraryX-libraryRootlist > * > ul[role="treegrid"]) .Root__main-view {
     display: none !important;
 }
 
-:has([data-overlayscrollbars-initialize="true"]):has(#VideoPlayerCinema_ReactPortal) {
-    outline: none !important;
-}
-
+/* Éléments glass supplémentaires */
 .view-homeShortcutsGrid-shortcut,
 #Desktop_PanelContainer_Id,
-/* Sidebar left your library */
 .Root__main-view,
 .main-yourLibraryX-library,
-/* Filter tags */
 .ChipInnerComponent-sm {
     background-color: var(--glass-bg) !important;
 }
