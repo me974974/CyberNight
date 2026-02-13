@@ -44,12 +44,12 @@
 }
 
 .progress-bar__slider {
-    transform: translate(-50%, -50%) !important;
+    
     background-color: transparent !important;
     background-image: url("https://github.com/me974974/CyberNight/blob/main/assets/david.png?raw=true");
     background-size: cover;
-    height: 20px;
-    width: 32px;
+    height: 30px;
+    width: 20px;
     box-shadow: none;
     display: flex;
 }
@@ -102,8 +102,24 @@
 
 /* Glows cyber */
 .cyber-smart svg,
-button[aria-checked="true"] svg {
+button[aria-checked="true"] svg,
+button[aria-pressed="true"] svg,
+button[data-active="true"] svg {
+    fill: var(--cyan) !important;
     filter: drop-shadow(0 0 10px #00FF9C) drop-shadow(0 0 4px #00F0FF);
+}
+
+.main-genericButton-button.main-genericButton-buttonActiveDot:after {
+    background-color: var(--cyan) !important;
+}
+
+.eYJgrgW01l7dHKuMJidG,
+.ListRowText-bodyMedium-textBase-listRowTitle-useBrowserDefaultFocusStyle {
+    color: var(--text-soft) !important;
+}
+
+.encore-internal-color-text-bright-accent {
+    color: var(--sandevistan) !important;
 }
 
 /* Global */
