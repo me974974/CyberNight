@@ -1,36 +1,37 @@
 /* ===============================
-   CYBERNIGHT – EDGERUNNERS GLASS (fond plus visible – février 2026)
+   CYBERNIGHT – EDGERUNNERS GLASS (fond ultra-visible – ajusté février 2026)
    =============================== */
 
 :root {
-    --glass-bg:        rgba(8, 18, 32, 0.22);     /* ← beaucoup plus transparent */
-    --glass-strong:    rgba(8, 18, 32, 0.35);
-    --cyan:            #00F0FF;
-    --sandevistan:     #00FF9C;
-    --text-main:       #E6F1FF;
-    --text-soft:       #9FB3C8;
+    --glass-bg: rgba(8, 18, 32, 0.20);       /* ← très transparent pour voir le fond */
+    --glass-strong: rgba(8, 18, 32, 0.28);
+    --cyan: #00F0FF;
+    --sandevistan: #00FF9C;
+    --text-main: #E6F1FF;
+    --text-soft: #9FB3C8;
 }
 
-/* Fond principal – doit ressortir fort */
+/* Fond principal – prioritaire et visible */
 .Root__top-container {
-    background: url("https://raw.githubusercontent.com/TON_PSEUDO/TON_REPO/main/assets/nightcity.png") center / cover no-repeat fixed !important;
+    background: url("https://github.com/me974974/CyberNight/blob/main/assets/nightcity.png?raw=true") center / cover no-repeat fixed !important;
     background-attachment: fixed !important;
+    background-color: transparent !important;
 }
 
-/* Pas d'overlay sombre global (ou très léger si tu veux) */
+/* Overlay → supprimé ou très léger (teste sans d'abord) */
 .Root__top-container::after {
-    content: none;   /* ← enlève complètement l'overlay qui noircit – teste d'abord comme ça */
-    /* Si tu veux un léger vignette aux bords, décommente et ajuste :
+    content: none !important;  /* ← enlève l'overlay sombre qui cache le plus */
+    /* Si texte trop dur à lire sur zones claires, décommente et baisse à 0.15 :
     content: "";
     position: fixed;
     inset: 0;
-    background: radial-gradient(circle at center, transparent 40%, rgba(8,18,32,0.5) 100%);
+    background: rgba(8, 18, 32, 0.12);
     pointer-events: none;
-    z-index: 0;
+    z-index: -1;
     */
 }
 
-/* Panneaux glass très transparents pour laisser voir le fond */
+/* Panneaux principaux : glass ultra-fin */
 .Root__main-view,
 .main-yourLibraryX-library,
 #Desktop_PanelContainer_Id,
@@ -39,61 +40,84 @@
 .view-homeShortcutsGrid-shortcut,
 .ChipInnerComponent-sm {
     background: var(--glass-bg) !important;
-    backdrop-filter: blur(16px) !important;
-    -webkit-backdrop-filter: blur(16px) !important;
+    backdrop-filter: blur(14px) !important;   /* blur réduit pour plus de netteté fond */
+    -webkit-backdrop-filter: blur(14px) !important;
     border-radius: 14px;
-    border: 1px solid rgba(0, 240, 255, 0.12);
+    border: 1px solid rgba(0, 240, 255, 0.10);
     position: relative;
     z-index: 1;
 }
 
-/* Sidebar encore un peu plus sombre mais pas opaque */
+/* Sidebar : transparent + glow cyan léger */
 .Root__nav-bar {
-    background: rgba(8, 18, 32, 0.38) !important;
-    backdrop-filter: blur(14px) !important;
-}
-
-/* Barre player → transparence accrue + glow cyan léger */
-.Root__now-playing-bar {
     background: rgba(8, 18, 32, 0.25) !important;
-    border-radius: 16px;
-    border: 1px solid rgba(0, 240, 255, 0.15);
-    backdrop-filter: blur(20px) !important;
+    backdrop-filter: blur(12px) !important;
+    border-right: 1px solid rgba(0, 240, 255, 0.08);
 }
 
-/* Textes restent lisibles grâce au contraste */
-* { color: var(--text-main) !important; text-shadow: 0 0 4px rgba(0,0,0,0.6); }  /* ← shadow léger aide lisibilité */
-span, div[data-testid="context-item-info-subtitle"] { color: var(--text-soft) !important; }
+/* Barre player : très transparente avec gradient subtil */
+.Root__now-playing-bar {
+    background: rgba(8, 18, 32, 0.18) !important;
+    border: 1px solid rgba(0, 240, 255, 0.12);
+    backdrop-filter: blur(18px) !important;
+    border-radius: 16px;
+}
 
-/* Play button + glows conservés */
+/* Textes lisibles même sur fond chargé */
+* {
+    color: var(--text-main) !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7), 0 0 6px rgba(0, 240, 255, 0.15);  /* ← shadow + glow cyan subtil */
+}
+
+span,
+div[data-testid="context-item-info-subtitle"],
+.main-type-mesto,
+.main-type-mestoBold {
+    color: var(--text-soft) !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Play button + glows conservés mais boostés */
 button[data-testid="control-button-playpause"] {
     background-color: var(--cyan) !important;
-    box-shadow: 0 0 16px var(--cyan), 0 0 32px rgba(0,240,255,0.4);
+    box-shadow: 0 0 16px var(--cyan), 0 0 32px rgba(0,240,255,0.5);
     border-radius: 50%;
 }
 button[data-testid="control-button-playpause"]:hover {
-    box-shadow: 0 0 24px var(--cyan), 0 0 48px rgba(0,240,255,0.6);
+    box-shadow: 0 0 24px var(--cyan), 0 0 48px rgba(0,240,255,0.7);
 }
 
-/* Barre progression + scrollbar conservées */
+/* Progression + scrollbar */
 .x-progressBar-fillColor {
     background: linear-gradient(90deg, var(--sandevistan), var(--cyan)) !important;
     box-shadow: 0 0 12px var(--sandevistan);
 }
-.progress-bar__slider { background: var(--sandevistan) !important; box-shadow: 0 0 10px var(--sandevistan); }
+.progress-bar__slider {
+    background: var(--sandevistan) !important;
+    box-shadow: 0 0 10px var(--sandevistan);
+}
 
-::-webkit-scrollbar-thumb { background: var(--sandevistan); box-shadow: 0 0 8px var(--sandevistan); }
-::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
+::-webkit-scrollbar-thumb {
+    background: var(--sandevistan);
+    box-shadow: 0 0 8px var(--sandevistan);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--cyan);
+}
 
 /* Glows cyber */
 .cyber-smart svg,
 button[aria-checked="true"] svg {
-    filter: drop-shadow(0 0 10px #00FF9C);
+    filter: drop-shadow(0 0 10px #00FF9C) drop-shadow(0 0 4px #00F0FF);
 }
 
-/* Évite que certains écrans spéciaux masquent tout */
+/* Gestion écrans spéciaux */
 #main:has(#VideoPlayerCinema_ReactPortal) .Root__main-view,
 #main:has(#VideoPlayerCinema_ReactPortal) .Root__right-sidebar,
 #main:has(#VideoPlayerCinema_ReactPortal) .Root__nav-bar {
+    display: none !important;
+}
+
+#main:has(.main-yourLibraryX-libraryRootlist > * > ul[role="treegrid"]) .Root__main-view {
     display: none !important;
 }
