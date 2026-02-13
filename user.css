@@ -103,13 +103,18 @@
 /* Glows cyber */
 .cyber-smart svg,
 button[aria-checked="true"] svg,
+button[aria-checked="mixed"] svg,
 button[aria-pressed="true"] svg,
-button[data-active="true"] svg {
+button[data-active="true"] svg,
+button.transfrom_this_shit_gng svg {
     fill: var(--cyan) !important;
     filter: drop-shadow(0 0 10px #00FF9C) drop-shadow(0 0 4px #00F0FF);
 }
 
-.main-genericButton-button.main-genericButton-buttonActiveDot:after {
+.main-genericButton-button.main-genericButton-buttonActiveDot:after,
+.Button-buttonTertiary-textBrightAccent-small-iconOnly-useBrowserDefaultFocusStyle:after,
+.EIFdvMxVD8zJO_zaZubt:before,
+.x_I4_QDM5MZhGKhtI6fb:after {
     background-color: var(--cyan) !important;
 }
 
