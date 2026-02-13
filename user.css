@@ -1,154 +1,99 @@
 /* ===============================
-   CYBERNIGHT – EDGERUNNERS GLASS
+   CYBERNIGHT – EDGERUNNERS GLASS (fond plus visible – février 2026)
    =============================== */
 
 :root {
-    --glass-bg: rgba(8, 18, 32, 0.55);
-    --glass-strong: rgba(8, 18, 32, 0.75);
-    --cyan: #00F0FF;
-    --sandevistan: #00FF9C;
-    --text-main: #E6F1FF;
-    --text-soft: #9FB3C8;
+    --glass-bg:        rgba(8, 18, 32, 0.22);     /* ← beaucoup plus transparent */
+    --glass-strong:    rgba(8, 18, 32, 0.35);
+    --cyan:            #00F0FF;
+    --sandevistan:     #00FF9C;
+    --text-main:       #E6F1FF;
+    --text-soft:       #9FB3C8;
 }
 
-/* Fond global via GitHub (supprime l'ancien ::before si présent) */
+/* Fond principal – doit ressortir fort */
 .Root__top-container {
-    background-color: transparent !important;
-    background-image: url("https://github.com/me974974/CyberNight/blob/main/assets/nightcity.png?raw=true") !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
+    background: url("https://raw.githubusercontent.com/TON_PSEUDO/TON_REPO/main/assets/nightcity.png") center / cover no-repeat fixed !important;
     background-attachment: fixed !important;
 }
 
-/* Overlay sombre optionnel pour meilleure lisibilité */
+/* Pas d'overlay sombre global (ou très léger si tu veux) */
 .Root__top-container::after {
+    content: none;   /* ← enlève complètement l'overlay qui noircit – teste d'abord comme ça */
+    /* Si tu veux un léger vignette aux bords, décommente et ajuste :
     content: "";
     position: fixed;
     inset: 0;
-    background: rgba(8, 18, 32, 0.35);
+    background: radial-gradient(circle at center, transparent 40%, rgba(8,18,32,0.5) 100%);
     pointer-events: none;
-    z-index: -1;
+    z-index: 0;
+    */
 }
 
-/* Glassmorphism sur les panneaux principaux */
+/* Panneaux glass très transparents pour laisser voir le fond */
 .Root__main-view,
 .main-yourLibraryX-library,
 #Desktop_PanelContainer_Id,
 .Root__right-sidebar,
-.Root__now-playing-bar {
+.Root__now-playing-bar,
+.view-homeShortcutsGrid-shortcut,
+.ChipInnerComponent-sm {
     background: var(--glass-bg) !important;
-    backdrop-filter: blur(18px) !important;
-    -webkit-backdrop-filter: blur(18px) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
     border-radius: 14px;
-    border: 1px solid rgba(0, 240, 255, 0.08);
+    border: 1px solid rgba(0, 240, 255, 0.12);
     position: relative;
-    z-index: 2;
+    z-index: 1;
 }
 
-/* Sidebar */
+/* Sidebar encore un peu plus sombre mais pas opaque */
 .Root__nav-bar {
-    background: rgba(8, 18, 32, 0.65) !important;
-    backdrop-filter: blur(12px) !important;
+    background: rgba(8, 18, 32, 0.38) !important;
+    backdrop-filter: blur(14px) !important;
 }
 
-/* Textes */
-* {
-    color: var(--text-main) !important;
-}
-
-span,
-div[data-testid="context-item-info-subtitle"] {
-    color: var(--text-soft) !important;
-}
-
-/* Barre player gradient */
+/* Barre player → transparence accrue + glow cyan léger */
 .Root__now-playing-bar {
-    background: linear-gradient(90deg, rgba(0, 240, 255, 0.15), rgba(108, 92, 231, 0.25)) !important;
+    background: rgba(8, 18, 32, 0.25) !important;
     border-radius: 16px;
+    border: 1px solid rgba(0, 240, 255, 0.15);
+    backdrop-filter: blur(20px) !important;
 }
 
-/* Bouton play glow */
+/* Textes restent lisibles grâce au contraste */
+* { color: var(--text-main) !important; text-shadow: 0 0 4px rgba(0,0,0,0.6); }  /* ← shadow léger aide lisibilité */
+span, div[data-testid="context-item-info-subtitle"] { color: var(--text-soft) !important; }
+
+/* Play button + glows conservés */
 button[data-testid="control-button-playpause"] {
     background-color: var(--cyan) !important;
-    box-shadow: 0 0 12px var(--cyan);
+    box-shadow: 0 0 16px var(--cyan), 0 0 32px rgba(0,240,255,0.4);
     border-radius: 50%;
-    transition: all 0.2s ease;
 }
-
 button[data-testid="control-button-playpause"]:hover {
-    box-shadow: 0 0 18px var(--cyan), 0 0 30px rgba(0, 240, 255, 0.4);
+    box-shadow: 0 0 24px var(--cyan), 0 0 48px rgba(0,240,255,0.6);
 }
 
-/* Hover glitch léger */
-button[data-testid^="control-button"]:hover {
-    transform: translateX(1px) skewX(-2deg);
-}
-
-/* Barre de progression Sandevistan */
+/* Barre progression + scrollbar conservées */
 .x-progressBar-fillColor {
     background: linear-gradient(90deg, var(--sandevistan), var(--cyan)) !important;
-    box-shadow: 0 0 10px var(--sandevistan);
+    box-shadow: 0 0 12px var(--sandevistan);
 }
+.progress-bar__slider { background: var(--sandevistan) !important; box-shadow: 0 0 10px var(--sandevistan); }
 
-.progress-bar__slider {
-    background: var(--sandevistan) !important;
-    box-shadow: 0 0 8px var(--sandevistan);
-}
+::-webkit-scrollbar-thumb { background: var(--sandevistan); box-shadow: 0 0 8px var(--sandevistan); }
+::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
 
-/* Scrollbar custom */
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.2);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--sandevistan);
-    border-radius: 10px;
-    box-shadow: 0 0 6px var(--sandevistan);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--cyan);
-}
-
-/* Sélection active */
-[aria-selected="true"] {
-    background: rgba(0, 240, 255, 0.1) !important;
-    border-left: 2px solid var(--cyan);
-}
-
-/* Glow smart shuffle & boutons actifs */
+/* Glows cyber */
 .cyber-smart svg,
 button[aria-checked="true"] svg {
-    filter: drop-shadow(0 0 8px #00FF9C);
+    filter: drop-shadow(0 0 10px #00FF9C);
 }
 
-/* Masque gradient sur header artiste */
-.main-view-container .before-scroll-node > * > :first-child {
-    mask-image: linear-gradient(to bottom, black 90%, transparent);
-    position: absolute;
-}
-
-/* Gestion fullscreen lyrics / library étendue */
+/* Évite que certains écrans spéciaux masquent tout */
 #main:has(#VideoPlayerCinema_ReactPortal) .Root__main-view,
 #main:has(#VideoPlayerCinema_ReactPortal) .Root__right-sidebar,
 #main:has(#VideoPlayerCinema_ReactPortal) .Root__nav-bar {
     display: none !important;
-}
-
-#main:has(.main-yourLibraryX-libraryRootlist > * > ul[role="treegrid"]) .Root__main-view {
-    display: none !important;
-}
-
-/* Éléments glass supplémentaires */
-.view-homeShortcutsGrid-shortcut,
-#Desktop_PanelContainer_Id,
-.Root__main-view,
-.main-yourLibraryX-library,
-.ChipInnerComponent-sm {
-    background-color: var(--glass-bg) !important;
 }
