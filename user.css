@@ -1,6 +1,7 @@
 /* =============================== CYBERNIGHT – EDGERUNNERS GLASS (fond ultra-visible – ajusté février 2026) =============================== */
 :root {
-    --glass-bg: rgba(8, 18, 32, 0.20);    /* ← très transparent pour voir le fond */
+    --glass-bg: rgba(8, 18, 32, 0.20);
+    /* ← très transparent pour voir le fond */
     --glass-strong: rgba(8, 18, 32, 0.28);
     --cyan: #00F0FF;
     --sandevistan: #00FF9C;
@@ -44,7 +45,7 @@
 }
 
 .progress-bar__slider {
-    
+
     background-color: transparent !important;
     background-image: url("https://github.com/me974974/CyberNight/blob/main/assets/david.png?raw=true");
     background-size: cover;
@@ -54,32 +55,41 @@
     display: flex;
 }
 
+.xwmHcoGFMXA0G2iBT3jO {
+    background-color: transparent !important;
+}
+
 .x-progressBar-fillColor {
     background-image: linear-gradient(90deg,
-        #ffe30f     0%,
-        #ffea4d    12%,    /* léger adoucissement jaune */
-        #00466ed9  38%,
-        #002b55d9  62%,
-        #001932d9  82%,
-        #001932cc  90%,    /* transparence très légère pour fondre */
-        #ffe30f    100%
-    ) !important;
-    
-    background-size: 300% 100%;   /* ← on passe à 300% pour plus d'espace */
+            #ffe30f 0%,
+            #ffea4d 12%,
+            /* léger adoucissement jaune */
+            #00466ed9 38%,
+            #002b55d9 62%,
+            #001932d9 82%,
+            #001932cc 90%,
+            /* transparence très légère pour fondre */
+            #ffe30f 100%) !important;
+
+    background-size: 300% 100%;
+    /* ← on passe à 300% pour plus d'espace */
     animation: cyberMove 9s linear infinite;
 }
 
 @keyframes cyberMove {
-    0%   { background-position: 0% 0; }
-    100% { background-position: 300% 0; }
+    0% {
+        background-position: 0% 0;
+    }
+
+    100% {
+        background-position: 300% 0;
+    }
 }
 
 .main-topBar-background {
-    background: linear-gradient(
-        90deg,
-        rgba(0, 25, 50, 0.85),
-        rgba(0, 70, 110, 0.85)
-    ) !important;
+    background: linear-gradient(90deg,
+            rgba(0, 25, 50, 0.85),
+            rgba(0, 70, 110, 0.85)) !important;
 
     backdrop-filter: blur(14px);
     border-bottom: 1px solid rgba(0, 240, 255, 0.25);
@@ -200,9 +210,10 @@ button.transfrom_this_shit_gng svg,
 
 button[data-testid="control-button-playpause"] {
     background-color: var(--cyan) !important;
-    box-shadow: 0 0 16px var(--cyan), 0 0 32px rgba(0,240,255,0.5);
+    box-shadow: 0 0 16px var(--cyan), 0 0 32px rgba(0, 240, 255, 0.5);
     border-radius: 50%;
 }
+
 button[data-testid="control-button-playpause"]:hover {
-    box-shadow: 0 0 24px var(--cyan), 0 0 48px rgba(0,240,255,0.7);
+    box-shadow: 0 0 24px var(--cyan), 0 0 48px rgba(0, 240, 255, 0.7);
 }
