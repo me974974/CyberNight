@@ -106,7 +106,8 @@ button[aria-checked="true"] svg,
 button[aria-checked="mixed"] svg,
 button[aria-pressed="true"] svg,
 button[data-active="true"] svg,
-button.transfrom_this_shit_gng svg {
+button.transfrom_this_shit_gng svg,
+#SpicyLyricsPageSvg {
     fill: var(--cyan) !important;
     filter: drop-shadow(0 0 10px #00FF9C) drop-shadow(0 0 4px #00F0FF);
 }
