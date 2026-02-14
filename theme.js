@@ -59,6 +59,11 @@ function changeSvgs(arr) {
       img.removeAttribute("srcset")
       img.setAttribute("src", `https://github.com/me974974/CyberNight/blob/main/assets/liked.png?raw=true`)
     }
+
+    for (const img of document.querySelectorAll('img[src="https://misc.spotifycdn.com/your-episodes/SE-300.png"]')) {
+      img.removeAttribute("srcset")
+      img.setAttribute("src", `https://github.com/me974974/CyberNight/blob/main/assets/episodes.png?raw=true`)
+    }
   }
 
   const observer = new MutationObserver(() => {
