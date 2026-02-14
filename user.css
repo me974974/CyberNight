@@ -56,27 +56,22 @@
 
 .x-progressBar-fillColor {
     background-image: linear-gradient(90deg,
-        rgba(0, 255, 156, 1) 0%,     /* Sandevistan */
-        rgba(63, 218, 216, 1) 20%,
-        rgba(47, 201, 226, 1) 35%,
-        rgba(0, 240, 255, 1) 50%,    /* Cyan principal */
-        rgba(95, 21, 242, 1) 65%,
-        rgba(186, 12, 248, 1) 80%,
-        rgba(251, 7, 217, 1) 90%,
-        rgba(0, 255, 156, 1) 100%    /* boucle propre */
+        #ffe30f     0%,
+        #ffea4d    12%,    /* léger adoucissement jaune */
+        #00466ed9  38%,
+        #002b55d9  62%,
+        #001932d9  82%,
+        #001932cc  90%,    /* transparence très légère pour fondre */
+        #ffe30f    100%
     ) !important;
-
-    box-shadow:
-        0 0 8px rgba(0, 255, 156, 0.6),
-        0 0 14px rgba(0, 240, 255, 0.4);
     
-    background-size: 200% 100%;
-    animation: cyberMove 6s linear infinite;
+    background-size: 300% 100%;   /* ← on passe à 300% pour plus d'espace */
+    animation: cyberMove 9s linear infinite;
 }
 
 @keyframes cyberMove {
-    0% { background-position: 0% 0; }
-    100% { background-position: 200% 0; }
+    0%   { background-position: 0% 0; }
+    100% { background-position: 300% 0; }
 }
 
 .main-topBar-background {
