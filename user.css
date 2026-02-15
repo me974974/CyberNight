@@ -59,6 +59,11 @@
     background-color: transparent !important;
 }
 
+
+.encore-dark-theme .encore-bright-accent-set {
+    background-color: #00466ed9 !important;
+}
+
 .x-progressBar-fillColor {
     background-image: linear-gradient(90deg,
             #ffe30f 0%,
@@ -120,7 +125,8 @@ button.transfrom_this_shit_gng svg,
 .main-genericButton-button.main-genericButton-buttonActiveDot:after,
 .Button-buttonTertiary-textBrightAccent-small-iconOnly-useBrowserDefaultFocusStyle:after,
 .EIFdvMxVD8zJO_zaZubt:before,
-.x_I4_QDM5MZhGKhtI6fb:after {
+.x_I4_QDM5MZhGKhtI6fb:after,
+.StyledTabItem-tab-tabItem-useBrowserDefaultFocusStyle[aria-selected="true"]::before {
     background-color: var(--cyan) !important;
 }
 
