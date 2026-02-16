@@ -1,15 +1,13 @@
-[
-    {
-        "name": "CyberNight",
-        "description": "Thème Cyberpunk Nightcity avec fond et boutons personnalisés",
-        "preview": "assets/preview.png",
-        "usercss": "user.css",
-        "schemes": "color.ini",
-        "include": ["theme.js"],
-        "readme": "README.md",
-        "authors": [
-            { "name": "Clément", "url": "https://github.com/me974974" }
-        ],
-        "tags": ["cyberpunk", "neon", "spotify"]
-    }
-]
+{
+  "name": "CyberNight",
+  "description": "Cyberpunk Edgerunners based theme with custom background and buttons",
+  "preview": "assets/preview.png",
+  "readme": "README.md",
+  "usercss": "https://github.com/me974974/CyberNight/blob/main/user.css",
+  "schemes": "color.ini",
+  "include": ["https://github.com/me974974/CyberNight/blob/main/theme.js"],
+  "authors": [
+        { "name": "DeidaraSensei", "url": "https://github.com/me974974" }
+    ],
+  "tags": ["cyberpunk", "neon"]
+}

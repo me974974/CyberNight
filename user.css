@@ -207,19 +207,20 @@ button.transfrom_this_shit_gng svg,
 
 /* Rotate cat paw previous and next buttons */
 [data-testid="control-button-skip-forward"] {
-    rotate: 90deg;
+    scale: 2;
 }
 
 [data-testid="control-button-skip-back"] {
-    rotate: -90deg;
+    rotate: 180deg;
+    scale: 2;
 }
 
-button[data-testid="control-button-playpause"] {
-    background-color: var(--cyan) !important;
-    box-shadow: 0 0 16px var(--cyan), 0 0 32px rgba(0, 240, 255, 0.5);
-    border-radius: 50%;
+.encore-dark-theme .encore-inverted-light-set {
+    --text-base: var(--cyan) !important;
+    background-color: transparent !important;
+    scale: 2;
 }
 
-button[data-testid="control-button-playpause"]:hover {
+/* button[data-testid="control-button-playpause"]:hover {
     box-shadow: 0 0 24px var(--cyan), 0 0 48px rgba(0, 240, 255, 0.7);
-}
+} */
