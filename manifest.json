@@ -3,9 +3,9 @@
   "description": "Cyberpunk Edgerunners based theme with custom background and buttons",
   "preview": "assets/preview.png",
   "readme": "README.md",
-  "usercss": "https://github.com/me974974/CyberNight/blob/main/user.css",
+  "usercss": "https://me974974.github.io/CyberNight/user.css",
   "schemes": "color.ini",
-  "include": ["https://github.com/me974974/CyberNight/blob/main/theme.js"],
+  "include": ["https://me974974.github.io/CyberNight/theme.js"],
   "authors": [
         { "name": "DeidaraSensei", "url": "https://github.com/me974974" }
     ],
