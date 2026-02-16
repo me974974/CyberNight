@@ -122,6 +122,10 @@ button.transfrom_this_shit_gng svg,
     filter: drop-shadow(0 0 10px #00FF9C) drop-shadow(0 0 4px #00F0FF);
 }
 
+button.scale_it_bro svg {
+    scale: 2;
+}
+
 .main-genericButton-button.main-genericButton-buttonActiveDot:after,
 .Button-buttonTertiary-textBrightAccent-small-iconOnly-useBrowserDefaultFocusStyle:after,
 .EIFdvMxVD8zJO_zaZubt:before,
@@ -219,6 +223,29 @@ button.transfrom_this_shit_gng svg,
     --text-base: var(--cyan) !important;
     background-color: transparent !important;
     scale: 2;
+}
+
+svg path {
+  fill-rule: evenodd !important;
+}
+
+button[aria-label="Ajouter à la playlist"],
+button[aria-label="Add to playlist"] {
+    scale: 2;
+}
+
+[data-testid="now-playing-widget"] > * > *:not([role="switch"]):not([aria-label="Ajouter à la playlist"]):not([aria-label="Add to playlist"]) svg, 
+.main-trackList-rowSectionEnd > *:not([role="switch"]):not([aria-label="Ajouter à la playlist"]):not([aria-label="Add to playlist"]) svg, 
+.Button-buttonTertiary-textBrightAccent-medium-iconOnly-useBrowserDefaultFocusStyle-condensed:not([aria-label="Ajouter à la playlist"]):not([aria-label="Add to playlist"]) svg, 
+.main-nowPlayingView-contextItemInfo [aria-checked="false"]:not([role="switch"]):not([aria-label="Ajouter à la playlist"]):not([aria-label="Add to playlist"]) svg,
+button[aria-label*="options"] svg {
+    fill: var(--cyan) !important;
+    filter: drop-shadow(0 0 10px #00FF9C) drop-shadow(0 0 4px #00F0FF);
+    scale: 1.5;
+}
+
+[data-testid="control-button-repeat"] {
+    scale: 1.7;
 }
 
 /* button[data-testid="control-button-playpause"]:hover {
