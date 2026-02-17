@@ -18,7 +18,9 @@
     overflow: hidden;
 }
 
-/* Calque 1 : fond fixe par défaut (Night City) */
+/* ========================= */
+/* FOND PAR DÉFAUT (Night City) */
+/* ========================= */
 .Root__top-container::before {
     content: "";
     position: absolute;
@@ -28,37 +30,32 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    z-index: -2;
+    z-index: -3;
     opacity: 1;
     transition: opacity 1.8s ease-in-out;
-    will-change: opacity;
 }
 
-/* Calque 2 : fond dynamique (change avec --image_url) */
-.Root__top-container::after {
-    content: "";
+.Root__top-container.has-custom-bg::before {
+    opacity: 0;
+}
+
+/* ========================= */
+/* LAYERS DYNAMIQUES */
+/* ========================= */
+.dynamic-bg-layer {
     position: absolute;
     inset: 0;
-    background-image: var(--image_url);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    z-index: -1;
+    z-index: -2;
     opacity: 0;
     transition: opacity 1.8s ease-in-out;
     will-change: opacity;
 }
 
-/* Quand une chanson spéciale est jouée → on affiche le calque dynamique */
-.Root__top-container.has-custom-track-bg::after {
-    opacity: 1;
-}
 
-/* Quand on revient au défaut → on cache le calque dynamique */
-.Root__top-container:not(.has-custom-track-bg)::after {
-    opacity: 0;
-}
 
 
 * {
