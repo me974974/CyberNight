@@ -180,6 +180,7 @@ function waitForElement(els, func, timeout = 100) {
 }
 
 // dynamic-bg.js
+// console.log(Spicetify.Player.data.item.uri);
 console.log("[DEBUG] pdynamic-bg.js chargé avec succès à " + new Date().toLocaleTimeString());
 
 (function () {
@@ -192,6 +193,7 @@ console.log("[DEBUG] pdynamic-bg.js chargé avec succès à " + new Date().toLoc
 
     const TRACK_BACKGROUNDS = {
         "spotify:track:7mykoq6R3BArsSpNDjFQTm": "url('https://github.com/me974974/CyberNight/blob/main/assets/i_really_want_to_stay_at_your_house.png?raw=true')",
+        "spotify:track:1qpGMJi0ippCaMUOs7cz2q": "url('https://github.com/me974974/CyberNight/blob/main/assets/let_you_down.png?raw=true')",
     };
 
     const ROOT = document.documentElement;
