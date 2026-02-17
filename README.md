@@ -69,3 +69,16 @@ Version rapide :
 ```bash
 spicetify config current_theme CyberNight
 spicetify apply
+```
+
+## Crédits
+
+- **Créateur & Mainteneur** — **DeidaraSensei** [Github](https://github.com/me974974) | [Discord](https://discordapp.com/users/834082309853544448)
+  
+- **Designer & Principal testeur** — **Mr Music**  
+  (direction artistique néon, choix des glows, tests intensifs d’ambiance et de lisibilité, choix des icônes)
+
+- **Inspiration de base** — Thème **Spicetify Cat** par Adrien5902  
+  [Spicetify Cat](https://github.com/Adrien5902/SpicetifyCat)
+
+- **Univers visuel** — *Cyberpunk: Edgerunners* (Studio Trigger × CD Projekt RED)
