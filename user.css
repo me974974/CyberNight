@@ -1,24 +1,69 @@
 /* =============================== CYBERNIGHT – EDGERUNNERS GLASS (fond ultra-visible – ajusté février 2026) =============================== */
+
 :root {
     --glass-bg: rgba(8, 18, 32, 0.20);
-    /* ← très transparent pour voir le fond */
     --glass-strong: rgba(8, 18, 32, 0.28);
     --cyan: #00F0FF;
     --sandevistan: #00FF9C;
     --text-main: #E6F1FF;
     --text-soft: #9FB3C8;
+
+    --image_url: url("https://github.com/me974974/CyberNight/blob/main/assets/nightcity.png?raw=true");
 }
+
+
+.Root__top-container {
+    position: relative;
+    background-color: transparent !important;
+    overflow: hidden;
+}
+
+/* Calque 1 : fond fixe par défaut (Night City) */
+.Root__top-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("https://github.com/me974974/CyberNight/blob/main/assets/nightcity.png?raw=true");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    z-index: -2;
+    opacity: 1;
+    transition: opacity 1.8s ease-in-out;
+    will-change: opacity;
+}
+
+/* Calque 2 : fond dynamique (change avec --image_url) */
+.Root__top-container::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--image_url);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    z-index: -1;
+    opacity: 0;                              /* invisible au départ */
+    transition: opacity 1.8s ease-in-out;
+    will-change: opacity;
+}
+
+/* Quand une chanson spéciale est jouée → on affiche le calque dynamique */
+.Root__top-container.has-custom-track-bg::after {
+    opacity: 1;
+}
+
+/* Quand on revient au défaut → on cache le calque dynamique */
+.Root__top-container:not(.has-custom-track-bg)::after {
+    opacity: 0;
+}
+
 
 * {
     --spice-main-elevated: rgba(0, 0, 0, 0.4)
 }
-
-.Root__top-container {
-    background: url("https://github.com/me974974/CyberNight/blob/main/assets/nightcity.png?raw=true") center / cover no-repeat fixed !important;
-    background-color: unset !important;
-    background-size: cover;
-}
-
 .Root__top-container:has(#VideoPlayerCinema_ReactPortal) {
     padding: 0;
 }
