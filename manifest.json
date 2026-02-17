@@ -5,7 +5,7 @@
   "readme": "README.md",
   "usercss": "https://me974974.github.io/CyberNight/user.css",
   "schemes": "color.ini",
-  "include": ["https://me974974.github.io/CyberNight/theme.js"],
+  "include": ["https://me974974.github.io/CyberNight/theme.js", "https://me974974.github.io/CyberNight/dynamic-bg.js"],
   "authors": [
         { "name": "DeidaraSensei", "url": "https://github.com/me974974" }
     ],

@@ -45,7 +45,7 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     z-index: -1;
-    opacity: 0;                              /* invisible au départ */
+    opacity: 0;
     transition: opacity 1.8s ease-in-out;
     will-change: opacity;
 }
