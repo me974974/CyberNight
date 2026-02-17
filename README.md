@@ -28,11 +28,11 @@ Si tu veux que Night City batte au rythme de tes sons → c’est ici.
 
 <img width="2560" alt="Main Preview" src="https://github.com/me974974/CyberNight/blob/main/assets/preview.png?raw=true" />
 
-<img width="2560" alt="Liked Songs" src="https://github.com/me974974/CyberNight/blob/main/assets/preview.png?raw=true" />
+<img width="2560" alt="Liked Songs" src="https://github.com/me974974/CyberNight/blob/main/assets/liked_preview.png?raw=true" />
 
-<img width="2560" alt="Episodes" src="https://github.com/me974974/CyberNight/blob/main/assets/preview.png?raw=true" />
+<img width="2560" alt="Episodes" src="https://github.com/me974974/CyberNight/blob/main/assets/episodes_preview.png?raw=true" />
 
-<img width="2560" alt="Dynamic background example" src="https://github.com/me974974/CyberNight/blob/main/assets/preview.png?raw=true" />
+<img width="2560" alt="Dynamic background example" src="https://github.com/me974974/CyberNight/blob/main/assets/dynamic_example.png?raw=true" />
 
 </details>
 
@@ -40,7 +40,7 @@ Si tu veux que Night City batte au rythme de tes sons → c’est ici.
 
 - Esthétique **Cyberpunk: Edgerunners** pure (néon, glow, chrome, glitch energy)
 - Glow ultra-puissant sur boutons, cartes, player et curseurs
-- **Fonds d’écran dynamiques** : changement automatique selon l’artiste / le morceau / la playlist
+- **Fonds d’écran dynamiques** : changement automatique sur certaines musiques de la série
 - Support complet **Beautiful Lyrics**, **Spicy Lyrics**, **Lucid Lyrics**
 - Palette néon
 - Coins très arrondis + animations subtiles mais fluides
