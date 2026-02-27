@@ -12,7 +12,9 @@ console.log("[DEBUG] dynamic-bg.js chargé");
 
     const TRACK_BACKGROUNDS = {
         "spotify:track:7mykoq6R3BArsSpNDjFQTm": "https://github.com/me974974/CyberNight/blob/main/assets/i_really_want_to_stay_at_your_house.png?raw=true",
+        "spotify:track:5BgztqoQ6NHOhNg5yq8SUQ": "https://github.com/me974974/CyberNight/blob/main/assets/i_really_want_to_stay_at_your_house.png?raw=true",
         "spotify:track:1qpGMJi0ippCaMUOs7cz2q": "https://github.com/me974974/CyberNight/blob/main/assets/let_you_down.png?raw=true",
+        "spotify:track:24wT9mkalLcUIDt9rkpYJJ": "https://github.com/me974974/CyberNight/blob/main/assets/let_you_down.png?raw=true",
     };
 
     const CONTAINER = () => document.querySelector(".Root__top-container");
