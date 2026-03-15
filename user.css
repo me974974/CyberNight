@@ -8,7 +8,7 @@
     --text-main: #E6F1FF;
     --text-soft: #9FB3C8;
 
-    --image_url: url("https://github.com/me974974/CyberNight/blob/main/assets/nightcity.png?raw=true");
+    --image_url: url("https://raw.githubusercontent.com/me974974/CyberNight/main/assets/nightcity.png?v=1");
 }
 
 
@@ -25,7 +25,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background-image: url("https://github.com/me974974/CyberNight/blob/main/assets/nightcity.png?raw=true");
+    background-image: url("https://raw.githubusercontent.com/me974974/CyberNight/main/assets/nightcity.png?v=1");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -91,7 +91,7 @@
 .x-progressBar-handle {
 
     background-color: transparent !important;
-    background-image: url("https://github.com/me974974/CyberNight/blob/main/assets/david.png?raw=true");
+    background-image: url("https://raw.githubusercontent.com/me974974/CyberNight/main/assets/david.png?v=1");
     background-size: cover;
     height: 30px;
     width: 20px;
