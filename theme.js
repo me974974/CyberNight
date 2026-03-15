@@ -67,12 +67,12 @@ function changeSvgs(arr) {
 
     for (const img of document.querySelectorAll('img[src="https://misc.scdn.co/liked-songs/liked-songs-300.jpg"]')) {
       img.removeAttribute("srcset")
-      img.setAttribute("src", `https://github.com/me974974/CyberNight/blob/main/assets/liked.png?raw=true`)
+      img.setAttribute("src", `https://raw.githubusercontent.com/me974974/CyberNight/main/assets/liked.png?v=1`)
     }
 
     for (const img of document.querySelectorAll('img[src="https://misc.spotifycdn.com/your-episodes/SE-300.png"]')) {
       img.removeAttribute("srcset")
-      img.setAttribute("src", `https://github.com/me974974/CyberNight/blob/main/assets/episodes.png?raw=true`)
+      img.setAttribute("src", `https://raw.githubusercontent.com/me974974/CyberNight/main/assets/episodes.png?v=1`)
     }
 
     function patchVosEpisodesHeader() {
