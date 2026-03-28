@@ -1,3 +1,99 @@
+window.__cyberNightThemeState ??= {
+  svgUpdaters: [],
+  scheduled: false,
+  observerStarted: false,
+  episodesPatcherStarted: false,
+};
+
+function scheduleCyberNightSvgUpdates() {
+  const state = window.__cyberNightThemeState;
+  if (state.scheduled) return;
+  state.scheduled = true;
+
+  requestAnimationFrame(() => {
+    state.scheduled = false;
+    for (const update of state.svgUpdaters) update();
+  });
+}
+
+function initCyberNightSvgObserver() {
+  const state = window.__cyberNightThemeState;
+  if (state.observerStarted) return;
+  state.observerStarted = true;
+
+  const observer = new MutationObserver(() => {
+    scheduleCyberNightSvgUpdates();
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+}
+
+function initEpisodesHeaderPatcher() {
+  const state = window.__cyberNightThemeState;
+  if (state.episodesPatcherStarted) return;
+  state.episodesPatcherStarted = true;
+
+  function patchLibraryImages() {
+    for (const img of document.querySelectorAll('img[src="https://misc.scdn.co/liked-songs/liked-songs-300.jpg"]')) {
+      if (img.dataset.cyberNightPatched === 'true') continue;
+      img.dataset.cyberNightPatched = 'true';
+      img.removeAttribute("srcset")
+      img.setAttribute("src", `https://raw.githubusercontent.com/me974974/CyberNight/main/assets/liked.png?v=1`)
+    }
+
+    for (const img of document.querySelectorAll('img[src="https://misc.spotifycdn.com/your-episodes/SE-300.png"]')) {
+      if (img.dataset.cyberNightPatched === 'true') continue;
+      img.dataset.cyberNightPatched = 'true';
+      img.removeAttribute("srcset")
+      img.setAttribute("src", `https://raw.githubusercontent.com/me974974/CyberNight/main/assets/episodes.png?v=1`)
+    }
+  }
+
+  function patchVosEpisodesHeader() {
+    patchLibraryImages();
+
+    const selectors = [
+      '[data-testid="your-episodes"] .main-entityHeader-imageContainer',
+      'section[aria-label*="épisodes" i] .main-entityHeader-imageContainer',
+      '.main-entityHeader-image svg[data-encore-id="icon"]'
+    ];
+
+    document.querySelectorAll(selectors.join(', ')).forEach(el => {
+      const container = el.closest('.main-entityHeader-imageContainer') || el;
+      if (!container) return;
+
+      const svg = container.querySelector('svg');
+      if (svg) svg.remove();
+      if (container.dataset.patched === 'true') return;
+      container.dataset.patched = 'true';
+
+      const img = document.createElement('img');
+      img.src = 'https://github.com/me974974/CyberNight/blob/main/assets/episodes.png?raw=true';
+      img.style.width = '100%';
+      img.style.height = '100%';
+      img.style.objectFit = 'cover';
+      img.style.borderRadius = '12px';
+      container.appendChild(img);
+
+      const shadowDiv = container.querySelector('.main-entityHeader-shadow, [class*="shadow"]');
+      if (shadowDiv) {
+        shadowDiv.style.boxShadow = 'none';
+        shadowDiv.style.background = 'transparent';
+      }
+    });
+  }
+
+  setTimeout(patchVosEpisodesHeader, 1000);
+  setTimeout(patchVosEpisodesHeader, 3000);
+  setTimeout(patchVosEpisodesHeader, 6000);
+
+  const observer = new MutationObserver(patchVosEpisodesHeader);
+  observer.observe(document.body, { childList: true, subtree: true });
+}
+
 function changeSvgs(arr) {
   function updateSVGs() {
     for (const s of arr) {
@@ -13,7 +109,8 @@ function changeSvgs(arr) {
       for (const el of els) {
         const svg = el.querySelector("svg")
         const label = el.getAttribute("aria-label");
-        const path = svg.querySelector("path");
+        const path = svg?.querySelector("path");
+        if (!svg || !path || !label) continue;
 
         function changePath() {
           if (label.includes("Activer la lecture aléatoire intelligente") || label.includes("Enable Smart Shuffle")) {
@@ -35,7 +132,10 @@ function changeSvgs(arr) {
         }
 
         changePath()
-        el.addEventListener("click", () => setTimeout(changePath, 200))
+        if (el.dataset.cyberNightSvgPatched !== "true") {
+          el.dataset.cyberNightSvgPatched = "true";
+          el.addEventListener("click", () => setTimeout(changePath, 200))
+        }
       }
     })
 
@@ -62,79 +162,18 @@ function changeSvgs(arr) {
       }
 
       changePath()
-      el.addEventListener("click", () => { setTimeout(changePath, 1) });
+      if (el.dataset.cyberNightRepeatPatched !== "true") {
+        el.dataset.cyberNightRepeatPatched = "true";
+        el.addEventListener("click", () => { setTimeout(changePath, 1) });
+      }
     })
 
-    for (const img of document.querySelectorAll('img[src="https://misc.scdn.co/liked-songs/liked-songs-300.jpg"]')) {
-      img.removeAttribute("srcset")
-      img.setAttribute("src", `https://raw.githubusercontent.com/me974974/CyberNight/main/assets/liked.png?v=1`)
-    }
-
-    for (const img of document.querySelectorAll('img[src="https://misc.spotifycdn.com/your-episodes/SE-300.png"]')) {
-      img.removeAttribute("srcset")
-      img.setAttribute("src", `https://raw.githubusercontent.com/me974974/CyberNight/main/assets/episodes.png?v=1`)
-    }
-
-    function patchVosEpisodesHeader() {
-      const selectors = [
-        '[data-testid="your-episodes"] .main-entityHeader-imageContainer',
-        'section[aria-label*="épisodes" i] .main-entityHeader-imageContainer',
-        '.main-entityHeader-image svg[data-encore-id="icon"]'
-      ];
-
-      document.querySelectorAll(selectors.join(', ')).forEach(el => {
-        const container = el.closest('.main-entityHeader-imageContainer') || el;
-        if (!container) return;
-
-        // Supprime le SVG s'il existe
-        const svg = container.querySelector('svg');
-        if (svg) svg.remove();
-
-        // Évite les doublons
-        if (container.dataset.patched === 'true') return;
-        container.dataset.patched = 'true';
-
-        
-
-        // Option img element (parfois plus net)
-        
-        const img = document.createElement('img');
-        img.src = 'https://github.com/me974974/CyberNight/blob/main/assets/episodes.png?raw=true';
-        img.style.width = '100%';
-        img.style.height = '100%';
-        img.style.objectFit = 'cover';
-        img.style.borderRadius = '12px';
-        container.appendChild(img);
-        
-
-        // Nettoie les styles placeholder
-        const shadowDiv = container.querySelector('.main-entityHeader-shadow, [class*="shadow"]');
-        if (shadowDiv) {
-          shadowDiv.style.boxShadow = 'none';
-          shadowDiv.style.background = 'transparent';
-        }
-      });
-    }
-
-    // Exécuter plusieurs fois car Spotify charge dynamiquement
-    setTimeout(patchVosEpisodesHeader, 1000);
-    setTimeout(patchVosEpisodesHeader, 3000);
-    setTimeout(patchVosEpisodesHeader, 6000);
-
-    // Observer permanent (très efficace)
-    const observer = new MutationObserver(patchVosEpisodesHeader);
-    observer.observe(document.body, { childList: true, subtree: true });
+    initEpisodesHeaderPatcher();
   }
 
-  const observer = new MutationObserver(() => {
-    updateSVGs();
-  });
-
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true
-  });
-
+  const state = window.__cyberNightThemeState;
+  state.svgUpdaters.push(updateSVGs);
+  initCyberNightSvgObserver();
   updateSVGs();
 }
 
