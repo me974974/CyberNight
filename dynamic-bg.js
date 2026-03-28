@@ -1,6 +1,4 @@
 // dynamic-bg.js
-// console.log(Spicetify.Player.data.item.uri);
-console.log("[DEBUG] dynamic-bg.js chargé");
 
 (function () {
     if (!Spicetify?.Player?.addEventListener) {
@@ -8,7 +6,6 @@ console.log("[DEBUG] dynamic-bg.js chargé");
         return;
     }
 
-    console.log("[DEBUG] Player détecté");
 
     const TRACK_BACKGROUNDS = {
         "spotify:track:7mykoq6R3BArsSpNDjFQTm": "https://raw.githubusercontent.com/me974974/CyberNight/main/assets/i_really_want_to_stay_at_your_house.png?v=1",
@@ -79,12 +76,6 @@ console.log("[DEBUG] dynamic-bg.js chargé");
 
     Spicetify.Player.addEventListener("songchange", updateBackground);
 
-    // Sécurité polling
-    const safetyInterval = setInterval(updateBackground, 1400);
-
     // Premier déclenchement
     setTimeout(updateBackground, 800);
-
-    // Nettoyage
-    window.addEventListener("beforeunload", () => clearInterval(safetyInterval));
 })();

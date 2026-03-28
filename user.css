@@ -29,7 +29,7 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment: scroll;
     z-index: -3;
     opacity: 1;
     transition: opacity 1.8s ease-in-out;
@@ -48,7 +48,7 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment: scroll;
     z-index: -2;
     opacity: 0;
     transition: opacity 1.8s ease-in-out;
@@ -60,30 +60,6 @@
 
 * {
     --spice-main-elevated: rgba(0, 0, 0, 0.4)
-}
-.Root__top-container:has(#VideoPlayerCinema_ReactPortal) {
-    padding: 0;
-}
-
-/* Do not display background elements when fullscreen lyrics */
-#main:has(#VideoPlayerCinema_ReactPortal) {
-
-    & .Root__main-view,
-    .Root__right-sidebar,
-    .Root__nav-bar {
-        display: none !important;
-    }
-
-    /* .Root__globalNav { background: black !important; } */
-}
-
-/* Do not display main view when expanded library */
-#main:has(.main-yourLibraryX-libraryRootlist > * > ul[role="treegrid"]) .Root__main-view {
-    display: none !important;
-}
-
-:has([data-overlayscrollbars-initialize="true"]):has(#VideoPlayerCinema_ReactPortal) {
-    outline: none !important;
 }
 
 .progress-bar__slider,
@@ -222,9 +198,7 @@ button.scale_it_bro svg {
 /* Right sidebar for queue */
 .Root__right-sidebar>*,
 /* Fullscreen lyrics */
-[data-overlayscrollbars-initialize="true"]:has(#VideoPlayerCinema_ReactPortal),
 .lyrics-lyrics-container:first-child,
-:has(+.lyrics-lyrics-container),
 /* Spicetify marketplace */
 .marketplace-header
 
