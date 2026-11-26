@@ -4,8 +4,11 @@ function changeSvgs(arr) {
       const [selector, pathD, viewBox] = s
       const svgs = document.querySelectorAll(selector);
       svgs.forEach(svg => {
+        const paths = svg.querySelectorAll("path");
+        // Multi-path native icons would only get their first path replaced, leaving a garbled glyph.
+        if (paths.length !== 1) return;
         svg.setAttribute("viewBox", viewBox)
-        svg.querySelector("path").setAttribute("d", pathD)
+        paths[0].setAttribute("d", pathD)
       });
     }
 
@@ -13,7 +16,8 @@ function changeSvgs(arr) {
       for (const el of els) {
         const svg = el.querySelector("svg")
         const label = el.getAttribute("aria-label");
-        const path = svg.querySelector("path");
+        const path = svg?.querySelector("path");
+        if (!path || !label) continue;
 
         function changePath() {
           if (label.includes("Activer la lecture aléatoire intelligente") || label.includes("Enable Smart Shuffle")) {
@@ -41,8 +45,9 @@ function changeSvgs(arr) {
 
     waitForElement(['[data-testid="control-button-repeat"]'], ([el]) => {
       const svg = el.querySelector("svg")
+      const path = svg?.querySelector("path");
+      if (!path) return;
       svg.setAttribute("viewBox", "0 0 111 103")
-      const path = svg.querySelector("path");
 
       function changePath() {
         if (el.getAttribute("aria-checked") == "true") {
@@ -139,7 +144,10 @@ function changeSvgs(arr) {
 }
 
 changeSvgs([
-  ['button[aria-label*="options"] svg, [data-testid="now-playing-widget"]>*>*:not([role="switch"]) svg, .main-trackList-rowSectionEnd>*:not([role="switch"]) svg, .Button-buttonTertiary-textBrightAccent-medium-iconOnly-useBrowserDefaultFocusStyle-condensed svg, .main-nowPlayingView-contextItemInfo [aria-checked="false"]:not([role="switch"]) svg',
+  // Only "More options" / "Plus d'options" buttons. The track-row, now-playing-widget and NPV clauses that
+  // used to be here relied on :not([role="switch"]) to skip the like button, but Spotify replaced that switch
+  // with an "Add to playlist" button, so they painted this glyph over it and over the duration-column clock.
+  ['button[aria-label*="options"] svg',
     "M 56.666 8.477 C 55.853 9.290, 54.684 13.227, 54.068 17.227 C 53.452 21.227, 52.509 26.975, 51.974 30 C 51.438 33.025, 50.570 41.575, 50.044 49 C 49.518 56.425, 48.545 68.847, 47.882 76.606 C 47.218 84.364, 46.959 91.451, 47.306 92.356 C 47.721 93.437, 49.106 94, 51.354 94 C 55.373 94, 57.211 91.765, 58.768 84.985 C 59.335 82.518, 61.235 75.100, 62.992 68.500 C 64.748 61.900, 67.024 53.350, 68.048 49.500 C 73.035 30.759, 77.376 9.418, 76.492 7.988 C 75.469 6.332, 58.389 6.754, 56.666 8.477 M 39.475 103.750 C 39.069 104.713, 38.167 108.650, 37.471 112.500 C 35.626 122.710, 36.098 123.234, 46.655 122.694 C 52.103 122.415, 55.638 121.761, 56.468 120.879 C 57.882 119.377, 60.366 104.401, 59.448 102.915 C 59.136 102.412, 54.682 102, 49.548 102 C 41.607 102, 40.104 102.261, 39.475 103.750", "0 0 115 137"],
 ])
 
